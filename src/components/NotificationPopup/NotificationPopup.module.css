@@ -1,23 +1,27 @@
 .NotificationPopup {
 	position: absolute;
 	top: 61px;
+	margin-left: 8px;
 	right: 0;
-	transform: translate(-4px, 4px);
+	transform: translate(100%, 4px);
 	padding: 8px;
 	border-radius: 4px;
 	background-color: #ffffff;
 	box-shadow: 0 5px 15px 0 rgba(0,0,0,0.2);
-	display: none;
+	display: flex;
 	flex-direction: column;
 	grid-row-gap: 8px;
 	max-width: 25%;
 	max-height: calc(100vh - 90px);
 	overflow-y: scroll;
 	z-index: 1;
+	transition: 0.2s;
+	opacity: 0;
 }
 
 .NotificationPopup_open {
-	display: flex;
+	opacity: 1;
+	transform: translate(-4px, 4px);
 }
 
 .NotificationPopup > span {
@@ -47,4 +51,16 @@
 
 .NotificationPopup .NotificationPopup__item button {
 	margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+	.NotificationPopup {
+		max-width: 50%;
+	}
+}
+
+@media (max-width: 480px) {
+	.NotificationPopup {
+		max-width: 100%;
+	}
 }

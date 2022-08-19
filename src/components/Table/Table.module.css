@@ -1,5 +1,6 @@
 .Table {
-
+	overflow-x: scroll;
+	width: 100%;
 }
 
 .Table .Table__header {
@@ -12,11 +13,6 @@
 .Table table {
 	border: 1px solid black;
 	border-collapse: collapse;
-
-}
-
-.Table table tr {
-
 }
 
 .Table table tr th {
@@ -34,4 +30,19 @@
 	padding: 8px;
 	border: 1px solid black;
 	border-collapse: collapse;
+	min-width: fit-content;
+}
+
+@media (max-width: 768px) {
+	.Table .Table__header {
+		flex-direction: column;
+		grid-gap: 16px;
+	}
+	
+	.Table .Table__header div {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 }
