@@ -1,6 +1,7 @@
+import { useFetchNotifications, useOutsideClickHandler } from '../../utils/hooks';
 import NotificationPopup from '../NotificationPopup/NotificationPopup';
 import styles from './Header.module.css';
-import { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, RefObject, useEffect, useRef, useState } from 'react';
 import bell_icon from '../../assets/icons/bell-icon.svg';
 
 export interface INotification {
@@ -11,64 +12,13 @@ export interface INotification {
 }
 
 const Header: FunctionComponent = () => {
-	const [notifications, setNotifications] = useState([
-		{
-			id: 0,
-			title: 'Ваш профиль просмотрели',
-			text: 'Никита Горбачёв просмотрел(а) ваш профиль',
-			checked: false,
-		},
-		{
-			id: 1,
-			title: 'Ваш профиль просмотрели',
-			text: 'Марина Меркушева просмотрел(а) ваш профиль',
-			checked: false,
-		},
-		{
-			id: 2,
-			title: 'Ваш профиль просмотрели',
-			text: 'Евгений Никонов просмотрел(а) ваш профиль',
-			checked: false,
-		},
-		{
-			id: 3,
-			title: 'Ваш профиль просмотрели',
-			text: 'Инна Белова просмотрел(а) ваш профиль',
-			checked: false,
-		},
-		{
-			id: 4,
-			title: 'Ваш профиль просмотрели',
-			text: 'Евгений Никонов просмотрел(а) ваш профиль',
-			checked: true,
-		},
-		{
-			id: 5,
-			title: 'Ваш профиль просмотрели',
-			text: 'Инна Горбачёва просмотрел(а) ваш профиль',
-			checked: true,
-		},
-		{
-			id: 6,
-			title: 'Ваш профиль просмотрели',
-			text: 'Джозеф Фролов просмотрел(а) ваш профиль',
-			checked: false,
-		},
-		{
-			id: 7,
-			title: 'Ваш профиль просмотрели',
-			text: 'Евгений Меркушев просмотрел(а) ваш профиль',
-			checked: true,
-		},
-		{
-			id: 8,
-			title: 'Ваш профиль просмотрели',
-			text: 'Инна Никонова просмотрел(а) ваш профиль',
-			checked: true,
-		},
-	]);
+	const [notifications, setNotifications] = useFetchNotifications();
 	const [notificationCount, setNotificationCount] = useState(0);
 	const [isOpenPopup, setIsOpenPopup] = useState(false);
+	
+	const popupRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+	
+	useOutsideClickHandler(popupRef, isOpenPopup, setIsOpenPopup);
 	
 	useEffect(() => {
 		setNotificationCount(
@@ -78,9 +28,15 @@ const Header: FunctionComponent = () => {
 		);
 	}, [notifications]);
 	
+	const handleButtonClick = () => {
+		setTimeout(() => {
+			setIsOpenPopup(!isOpenPopup);
+		}, 0);
+	};
+	
 	return (
 		<header className={ styles.Header }>
-			<button className={ styles.Header__button } onClick={ setIsOpenPopup.bind(this, !isOpenPopup) }>
+			<button className={ styles.Header__button } onClick={ handleButtonClick }>
 				<img src={ bell_icon } width={ 24 } height={ 24 } alt=""/>
 				{ notificationCount > 0 && <em>{ notificationCount }</em> }
 			</button>
@@ -88,6 +44,8 @@ const Header: FunctionComponent = () => {
 				notifications={ notifications }
 				setNotifications={ setNotifications }
 				isOpenPopup={ isOpenPopup }
+				notificationCount={ notificationCount }
+				ref={popupRef}
 			/>
 		</header>
 	);
