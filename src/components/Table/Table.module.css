@@ -1,0 +1,37 @@
+.Table {
+
+}
+
+.Table .Table__header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.Table table {
+	border: 1px solid black;
+	border-collapse: collapse;
+
+}
+
+.Table table tr {
+
+}
+
+.Table table tr th {
+	cursor: pointer;
+	user-select: none;
+	white-space: nowrap;
+	background-color: #eeeeee;
+}
+
+.Table table tr th * {
+	vertical-align: middle;
+}
+
+.Table table tr td, .Table table tr th {
+	padding: 8px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}

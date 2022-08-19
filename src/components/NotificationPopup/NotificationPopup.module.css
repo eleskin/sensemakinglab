@@ -13,6 +13,7 @@
 	max-width: 25%;
 	max-height: calc(100vh - 90px);
 	overflow-y: scroll;
+	z-index: 1;
 }
 
 .NotificationPopup_open {
@@ -46,14 +47,4 @@
 
 .NotificationPopup .NotificationPopup__item button {
 	margin-top: 12px;
-	padding: 4px;
-	border-radius: 4px;
-	border: 1px solid #e0e0e0;
-	cursor: pointer;
-	background-color: transparent;
-	transition: background-color 0.2s;
-}
-
-.NotificationPopup .NotificationPopup__item button:hover {
-	background-color: rgba(137, 198, 255, 0.2);
 }
